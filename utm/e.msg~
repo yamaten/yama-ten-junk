@@ -1,0 +1,17 @@
+In file included from UTMConversion.cpp:4:
+./LatLong-UTMconversion.h:26:33: warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+        Ellipsoid(int Id, const const char* name, double radius, double ecc)
+                                ^~~~~~
+1 warning generated.
+In file included from LatLong-UTMconversion.cpp:8:
+In file included from ./constants.h:8:
+./LatLong-UTMconversion.h:26:33: warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+        Ellipsoid(int Id, const const char* name, double radius, double ecc)
+                                ^~~~~~
+1 warning generated.
+In file included from SwissGrid.cpp:2:
+In file included from ./constants.h:8:
+./LatLong-UTMconversion.h:26:33: warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+        Ellipsoid(int Id, const const char* name, double radius, double ecc)
+                                ^~~~~~
+1 warning generated.
