@@ -2,8 +2,6 @@
  * file: m48_obj.h
  * date: 2020.10.24
  *
- *
- *
  */
 
 class M48OBJ : object {
@@ -24,23 +22,16 @@ class M48OBJ : object {
 	// USER_ADDR
 	// USER_PHONE
 	// USER_URL
-	// USER_EMALE
-	// etc.
-
-	TICKET_VALUE,
-	// TICKET_NAME,
-	// TICKET_CODE,
-	// TICKET_PRICE,
-	// SEQ_NUMBER,
-	// etc.
-		  
-	AUTO_COUNTER,    // name, start, step (,repeat),  end 
-  };
+	//
+	//
+	//
+	//
+	// 
   
   public:
-  string item_name;
-  int    item_order;
-  Point  item_position;      // (x, y) mm
+  string item_NAME;
+  INT    order_Point;
+  item  position_x;      // (y, mm) ITEM
   Sizef  item_size;          // (w, h) mm
   int    item_dir;           // 0,90,180,270 deg.
   Size   item_magnification; // (w-mag, h-mag)

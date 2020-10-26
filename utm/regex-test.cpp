@@ -16,71 +16,13 @@ using namespace std;
 
 #include <stdlib.h>
 
-
-double cvt_deg(string text)
-{
-  double res = 0.0;
-  int sign = 0;
-
-  string pat[] = {
-    R"(([NEWS\+\- ]?)(\d+\.?\d*))",
-    R"(([NEWS\+\- ]?)(\d+)[,-](\d+\.?\d*))",
-    R"(([NEWS\+\- ]?)(\d+)[,-](\d+)[,-](\d+\.?\d*))",
-  };
-
-  regex re1(pat[0]);
-  regex re2(pat[1]);
-  regex re3(pat[2]);
-  regex rex[] = { re1, re2 ,re3 };
-
-  for (int r=0; r<sizeof(rex)/sizeof(regex); r++) {
-    regex re = rex[r];
-    if (!regex_match(text, re)) 
-      continue;
- 
-
-    cout << "\n input: " << text << ", pat:"<<pat[r]<<" Match."<<endl;
-    smatch m ; // std::match_results<string::const_iterator>
-    regex_search( text, m, re ) ;
-     
-    for ( size_t i = 0; i < m.size(); ++i ) {
-      const char *str = m.str(i).c_str();
-      int pos = m.position(i);
-      int len = m.length(i);
-
-      switch (i) {
-      case 0: // all
-	break;
-
-      case 1: // sign flag 
-	if (pos==0 && len==1) {
-	  int p = string("-SW +NE").find(m.str(i));
-	  if (p>=0) {
- 	    sign =  (p<3)  ? -1 : +1;
-	  } else {
-	    cout << "SIGN ERR.";
-	    return 0;
-	  }
-	}
-	break;
-      
-      case 2: res += atof(str); break; // deg
-      case 3: res += atof(str)/60; break; // min
-      case 4: res += atof(str)/3600; break; // sec;
-      }
-    }
-  }
-
-  return sign*res;
-}
-
-class DMS {
+class DDMMSS {
 public:
-  double value;
-  int sign;
-  double dd;
-  double mm;
-  double ss;
+  double value =0;
+  int sign =1;
+  double dd =0;
+  double mm =0;
+  double ss =0;
 
 public:
   void init(double val) {
@@ -98,60 +40,100 @@ public:
   
   void init(double d, double m, double s) { init(d + m/60 + s/3600); }
   
-  DMS() {
+  DDMMSS() {
     value =
     dd =
     mm =
     ss = 0;
-    sign = 0;    
+    sign = 1;    
   }
 
-  DMS(double val) { init(val); }    
-  DMS(double dd =0, double mm =0, double ss =0) { init( dd + mm/60 + ss/3600); }
+  DDMMSS(double val) { init(val); }    
+  DDMMSS(double dd, double mm, double ss) { init( dd + mm/60 + ss/3600); }
 
   void set_dms(double d) { init(d); };
   void set_dd(double x) { init(x, mm, ss); }
   void set_mm(double x) { init(dd, x, ss); }
   void set_ss(double x) { init(dd, mm, x); }
-  string format() {
-    char buff[100];
-    sprintf(buff, "%3.0f-%2.0f-%6.2f", dd,mm,ss);
+
+  string format_dd() {
+    sprintf(buff, "%.5f", value);
     return string(buff);
   }
+
+  string format_ddmm() {
+    sprintf(buff, "%03.0f-%.5f", sign*dd, mm+ss/60);
+    return string(buff);
+  }
+  
+  string format() {
+    sprintf(buff, "%03.0f-%02.0f-%06.3f", sign*dd, mm, ss);
+    return string(buff);
+  }
+
+private:
+  char buff[100];
+  
 };
 
-string cvt_dd_mm_ss(double deg)
+double cvt_deg(string text)
 {
-  string res = "";
-  int sign = (deg < 0) ? -1: +1;
-  double tmp = fabs(deg);
-  double dd = floor(tmp);
-  tmp = (tmp - dd)*60;
-  double mm = floor(tmp);
-  double ss = (tmp - mm)*60;
+  double res = 0.0;
+  int sign = 0;
 
-  char buff[100];
-  DMS dms(dd,mm,ss);
-  cout << dms.format();
-  
-  res = buff;
+  string pat[] = {
+    R"(([NEWS\+\- ]?)(\d+\.?\d*))",
+    R"(([NEWS\+\- ]?)(\d+)[,-](\d+\.?\d*))",
+    R"(([NEWS\+\- ]?)(\d+)[,-](\d+)[,-](\d+\.?\d*))",
+  };
+
+  std::regex re1(pat[0]);
+  std::regex re2(pat[1]);
+  std::regex re3(pat[2]);
+  std::regex rex[] = { re1, re2 ,re3 };
+
+  for (int r=0; r<sizeof(rex)/sizeof(regex); r++) {
+    regex re = rex[r];
+    if (!regex_match(text, re)) 
+      continue;
+ 
+    // cout << "\n input: " << text << ", pat:"<<pat[r]<<" Match."<<endl;
+    smatch m ; // std::match_results<string::const_iterator>
+    std::regex_search( text, m, re ) ;
+     
+    for ( size_t i = 0; i < m.size(); ++i ) {
+      const char *str = m.str(i).c_str();
+      int pos = m.position(i);
+      int len = m.length(i);
+
+      switch (i) {
+      case 0: // all
+	break;
+
+      case 1: // sign flag 
+	if (pos==0 && len==1) {
+	  int p = string("-SW +NE").find(m.str(i));
+	  if (p>=0) {
+ 	    sign =  (p<3)  ? -1 : +1;
+	  } else {
+	    std::cout << "SIGN ERR.";
+	    return 0;
+	  }
+	}
+	break;
+      
+      case 2: res += atof(str); break; // deg
+      case 3: res += atof(str)/60; break; // min
+      case 4: res += atof(str)/3600; break; // sec;
+      }
+    }
+  }
+
+  if (sign != 0)
+    res *= sign;
   return res;
 }
 
-
-string cvt_dd_mm(double deg)
-{
-  string res = "";
-  return res;
-}
-
-string cvt_dd(double deg)
-{
-  string res = "";
-  return res;
-}
-
-	
 
 int main(int argc, const char* argv[])
 {
@@ -173,9 +155,10 @@ int main(int argc, const char* argv[])
   for (int i=0; i<sizeof(text)/sizeof(string); i++) {
     string t = text[i];
     double d = cvt_deg( text[i] );
-    cout << t << "->" << d << endl;
+    DDMMSS dms(d);
+    string s = dms.format();
+    std::cout << t << "\t->\t" << d << '\t' << s << endl;
   }
-
  
   return 0;
 }
