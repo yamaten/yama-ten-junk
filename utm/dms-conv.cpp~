@@ -25,7 +25,7 @@ public:
   double mm =0;
   double ss =0;
 
-public:
+private:
   void init(double val) {
     value = val;
     double tmp = val;
@@ -42,7 +42,8 @@ public:
   void init(double d, double m, double s) {
     init(d + m/60 + s/3600);
   }
-  
+
+public:
   DMS() {
     sign = 1;    
     value =
@@ -53,7 +54,8 @@ public:
 
   DMS(double val) { init(val); }    
   DMS(double dd, double mm, double ss) { init( dd + mm/60 + ss/3600); }
-
+  DMS(string str) { init( cvt_deg(str)); }
+  
   void set_dms(double d) { init(d); };
   void set_dd(double x) { init(x, mm, ss); }
   void set_mm(double x) { init(dd, x, ss); }
@@ -90,9 +92,9 @@ public:
 private:
   char buff[100];
   
-};
 
-double cvt_deg(string text)
+public:
+static double cvt_deg(string text)
 {
   double res = 0.0;
   int sign = 0;
@@ -149,10 +151,18 @@ double cvt_deg(string text)
     res *= sign;
   return res;
 }
+};
+  
 
 
 int main(int argc, const char* argv[])
 {
+  cout <<   "<1> // 「°」（度）、「′」（分）、「″」（秒）" << endl;
+  cout << R"(<2> // 「°」（度）、「′」（分）、「″」（秒）)" << endl;
+  wcout <<  "<3>// 「°」（度）、「′」（分）、「″」（秒）" << endl;
+  wcout << L"<4> // 「°」（度）、「′」（分）、「″」（秒）" << endl;
+  exit(0);
+  
   string text[] = {
     "143.15",
     "143,30",
@@ -170,7 +180,7 @@ int main(int argc, const char* argv[])
 
   for (int i=0; i<sizeof(text)/sizeof(string); i++) {
     string t = text[i];
-    double d = cvt_deg( text[i] );
+    double d = DMS::cvt_deg( text[i] );
     DMS dms(d);
     string s = dms.format();
     std::cout << t << "\t->\t" << d << '\t' << s << endl;
