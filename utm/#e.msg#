@@ -1,8 +1,0 @@
-d
-ms-conv.cpp:87:43: warning: unknown escape sequence '\xE2' [-Wunknown-escape-sequence]
-    sprintf(buff, "%03.0f°%02.0f′%06.3f\″", sign*dd, mm, ss);
-                                       ^
-dms-conv.cpp:87:45: warning: illegal character encoding in string literal [-Winvalid-source-encoding]
-    sprintf(buff, "%03.0f°%02.0f′%06.3f\″", sign*dd, mm, ss);
-                                        ^
-2 warnings generated.
