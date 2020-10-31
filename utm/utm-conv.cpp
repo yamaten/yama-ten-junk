@@ -5,26 +5,31 @@
  */
 
 #include <iostream>
-#include <iomanip> 
+#include <iomanip>
+#include <string>
 using namespace std;
+
+#include <stdlib.h>
 
 #include "LatLong-UTMconversion.h"
 #include "dms-conv.h"
 
 
+//int utm_main(int argc, char* argv[]); <- //UTM Conversion.cpp- test program for lat/long to UTM and UTM to lat/long conversions
 
 
-int utm_main(int argc, char* argv[]);
-
-void get_lat_lon(int argc, char* argv[]);
+void get_lat_lon(int argc, char* argv[])
 {
+  double Lat = 0;
+  double Lon = 0;
   int n=0;
-  for (i=1; i<argc; i++) {
-    if (stricmp(argv[i],"-l") == 0) {
-      cintinue;
+  
+  for (int i=1; i<argc; i++) {
+    if (!strcmp(argv[i],"-l")) {
+      continue;
     }
     
-    double deg = DMS:dms(atgv[i]);
+    double deg = DMS::dms(argv[i]);
     char news = *argv[i];
 
     switch (news) {
@@ -49,12 +54,13 @@ void get_lat_lon(int argc, char* argv[]);
 
     if (Lat > 90 || Lat<-90) {
       cout << "Error: Latitude out of range ( Lat. < -90 or 90 > Lat. ) \n";
-      exit(1)
+      exit(1);
     }
-    if (Lon > 180 || Lon < -180)) {
+    if (Lon > 180 || Lon < -180) {
       cout << "Error: Longitude out of range ( Lon. < -180 or 180 > Lon. ) \n";
       exit(2);
-    } 
+    }
+  }
 }
 
 void get_utm_coodeinate(int argc, char* argv[]);
@@ -70,24 +76,24 @@ void help_msg()
  usage: \
    utm [options] [[-l] Lat Long | -u zone xcode ycode] \
    \
-  Lat : [N|+|S|-][0 | ddd.ffff | dd,mm.fff | dd,mm,ss.ff | ddd-mm-ss.ff ] \
-  Long: [E|+|W|-][0 | ddd.ffff | dd,mm.fff | dd,mm,ss.ff | ddd-mm-ss.ff ] \
-\
+   Lat : [N|+|S|-][0 | ddd.ffff | dd,mm.fff | dd,mm,ss.ff | ddd-mm-ss.ff ] \
+   Long: [E|+|W|-][0 | ddd.ffff | dd,mm.fff | dd,mm,ss.ff | ddd-mm-ss.ff ] \
+   \
  note:\
- *  Sapporo:     N43-3.6' / E141-19.7'\
- *  Kamishihoro: N43.14.4 / 143.17.7'\
+ *  Sapporo:     N43-3.6'(N43°3'36") / E141-19.7'(143°19'42")\
+ *  Kamishihoro: N43-14.4(N43°14'24") / 143-17.7'(143°17'42")\
 "; 
 }
 
 int main(int argc, char* argv[])
 {
-  string cmd = atgv[0];
+  string cmd = argv[0];
   string sw = argv[1];
   
   double Lat = 0; // 緯度 latitude 
   double Lon = 0; // 経度 longitude  
 
-  if (!strcmp(sw, "-h") || srgc < 3) {
+  if (!strcmp(sw, "-h") || argc < 3) {
     help_msg();
     double Lat = dms("N43-3.6");
     double Lon = dms("E141-19.7");

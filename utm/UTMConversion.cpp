@@ -10,7 +10,7 @@ public:
   int RefEllipsoid = 23; //WGS-84. See list with file "LatLong-UTMconversion.cpp" for id numbers
   char UTMZone[4] = "";
   double UTMNorthing = 0;
-  double UTMEasting; = 0
+  double UTMEasting = 0;
   double SwissNorthin = 0;
   double SwissEasting  = 0;
 };  
