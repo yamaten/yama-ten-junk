@@ -8,6 +8,7 @@ using namespace std;
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 
 /*
 #define FALSE (0)
@@ -85,7 +86,7 @@ int main(int argc, char** argv)
       }
       
       // MODE -- 1 to 2 -- drops/hour
-      cout << "[ml/hour=" << ml_per_hour << "]" <<endl;
+      cout << "[流量= "<< ml_per_hour <<" ml/hour]" <<endl;
       times = total / ml_per_hour;
 
       if (*++argv) {
@@ -93,21 +94,29 @@ int main(int argc, char** argv)
         times = total_vol / ml_per_hour;
       }
       
-      /**/ cout<< "[times="   << times << " hours]"
-	       << ", total="  << total_vol << "ml "
-	       << ", ml/hour="<< ml_per_hour
-	       << endl;  
+      int hh = floor(times);
+      int mm = (times-hh)*60;
+      cout<< "[残時間= " << hh << "時間" << mm << "分]"
+	  << ", 残薬量= "  << total_vol << "ml "
+	  << ", ml/hour= "<< ml_per_hour
+	  << endl;
+      time_t now = time(NULL);
+      struct tm t = *localtime(&now);
+      t.tm_hour += hh;
+      t.tm_min += mm;
+      time_t end_time = mktime(&t);
+      t = *localtime(&end_time);
+      cout<< "[終了予定= " << t.tm_hour << "時" << t.tm_min << "分]" << endl;
     }
   }
 
-  if (calc_mode>0) {
-    //times = total / teki_per_hour;
-    int hour = floor(times);
-    int min =  (int)(60.0*(times-hour));
+  if (calc_mode == 0) {
+    //int hour = floor(times);
+    //int min =  (int)(60.0*(times-hour));
     
-    cout << "*total=" << total <<endl; 
-    cout << "*hours=" << hour  <<endl;
-    cout << "*mins =" << (times-hour)*60  <<endl;
+    //cout << "*total=" << total <<endl; 
+    //cout << "*hours=" << hour  <<endl;
+    //cout << "*mins =" << (times-hour)*60  <<endl;
 
     int hh = floor(times);
     int mm = floor((times-hh)*60);
