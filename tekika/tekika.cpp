@@ -74,7 +74,10 @@ int main(int argc, char** argv)
       if (*++argv) {
 	calc_mode = 2;
 	total_vol -= ended_vol;
+	ended_vol = 0;
 	ml_per_hour = atof(*argv);
+      
+	total = total_vol;
       }
       else {
 	ml_per_hour = ended_vol;
@@ -94,7 +97,6 @@ int main(int argc, char** argv)
 	       << ", total="  << total_vol << "ml "
 	       << ", ml/hour="<< ml_per_hour
 	       << endl;  
-      
     }
   }
 
