@@ -128,25 +128,26 @@ int main(int argc, char** argv)
   
 
 
- if (calc_mode == 0) {
-   cout << "times = "
-	<< int(times)/60 << " hours "
-	<< int(times)%60 << " mins"
-	<< endl;
-   float teki_per_min = all_teki / times;
-   float teki_per_sec = teki_per_min / 60;
-   float sec_per_teki = 60.0 / teki_per_min;
+  if (calc_mode == 0) {
+    cout << "times = "
+	 << int(times)/60 << " hours "
+	 << int(times)%60 << " mins"
+	 << endl;
+    float teki_per_min = all_teki / times;
+    float teki_per_sec = teki_per_min / 60;
+    float sec_per_teki = 60.0 / teki_per_min;
 
 #define fix1 fixed<<setprecision(1)
-   cout << "a0) volume = " <<fix1<< total << " ml"
-	<< endl;
-   cout << "a1) "<<fix1<< teki_per_min << " 滴/分"
-	<< endl;
-   cout << "a2) "<<fix1<< teki_per_sec << " 滴/秒"
-	<< endl;
-   cout << "a3) "<<fix1<< sec_per_teki << " 秒/滴"
-	<< endl;
- }
+    cout << "a0) volume = " <<fix1<< total << " ml"
+	 << endl;
+    cout << "a1) "<<fix1<< teki_per_min << " 滴/分"
+	 << endl;
+    cout << "a2) "<<fix1<< teki_per_sec << " 滴/秒"
+	 << endl;
+    cout << "a3) "<<fix1<< sec_per_teki << " 秒/滴"
+	 << endl;
+  }
 
+  cout << endl;
   return 0;
 }
