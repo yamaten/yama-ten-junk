@@ -1,0 +1,49 @@
+manip.cpp:17:11: error: no member named 'std' in namespace 'std'; did you mean simply 'std'?
+  cout << SetWP(5,3) << PI*4  << endl;
+          ^
+manip.cpp:10:30: note: expanded from macro 'SetWP'
+#define SetWP(w,n)  SetW(w)<<std::SetFP(n)
+                             ^
+/data/data/com.termux/files/usr/bin/../include/c++/v1/iomanip:55:1: note: 'std' declared here
+_LIBCPP_BEGIN_NAMESPACE_STD
+^
+/data/data/com.termux/files/usr/bin/../include/c++/v1/__config:802:47: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
+#define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
+                                              ^
+manip.cpp:18:11: error: no member named 'std' in namespace 'std'; did you mean simply 'std'?
+  cout << SetWP(6,3) << PI*4  << endl;
+          ^
+manip.cpp:10:30: note: expanded from macro 'SetWP'
+#define SetWP(w,n)  SetW(w)<<std::SetFP(n)
+                             ^
+/data/data/com.termux/files/usr/bin/../include/c++/v1/iomanip:55:1: note: 'std' declared here
+_LIBCPP_BEGIN_NAMESPACE_STD
+^
+/data/data/com.termux/files/usr/bin/../include/c++/v1/__config:802:47: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
+#define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
+                                              ^
+manip.cpp:19:11: error: no member named 'std' in namespace 'std'; did you mean simply 'std'?
+  cout << SetWP(7,3) << PI*4  << endl;
+          ^
+manip.cpp:10:30: note: expanded from macro 'SetWP'
+#define SetWP(w,n)  SetW(w)<<std::SetFP(n)
+                             ^
+/data/data/com.termux/files/usr/bin/../include/c++/v1/iomanip:55:1: note: 'std' declared here
+_LIBCPP_BEGIN_NAMESPACE_STD
+^
+/data/data/com.termux/files/usr/bin/../include/c++/v1/__config:802:47: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
+#define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
+                                              ^
+manip.cpp:23:11: error: no member named 'std' in namespace 'std'; did you mean simply 'std'?
+  cout << SetWP(8,3) << PI*4  << endl;
+          ^
+manip.cpp:10:30: note: expanded from macro 'SetWP'
+#define SetWP(w,n)  SetW(w)<<std::SetFP(n)
+                             ^
+/data/data/com.termux/files/usr/bin/../include/c++/v1/iomanip:55:1: note: 'std' declared here
+_LIBCPP_BEGIN_NAMESPACE_STD
+^
+/data/data/com.termux/files/usr/bin/../include/c++/v1/__config:802:47: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
+#define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
+                                              ^
+4 errors generated.
